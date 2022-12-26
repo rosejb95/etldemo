@@ -1,0 +1,13 @@
+CREATE TABLE source.yfinance_ticker_history (
+  history_date VARCHAR(25),
+  open_price VARCHAR(19),
+  high_price VARCHAR(19),
+  low_price VARCHAR(19),
+  close_price VARCHAR(19),
+  adjusted_close_price VARCHAR(19),
+  volume VARCHAR(19),
+  dividends VARCHAR(19),
+  stock_splits VARCHAR(19),
+  entry_datetime DATETIME2 DEFAULT SYSUTCDATETIME()
+)
+

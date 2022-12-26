@@ -1,0 +1,17 @@
+{
+    "[sql]": {
+        "editor.defaultFormatter": "dorzey.vscode-sqlfluff",
+        "editor.tabSize": 2
+    },
+    "sqlfluff.dialect": "tsql",
+    "sqlfluff.executablePath": "sqlfluff",
+    "sqlfluff.format.enabled": true,
+    "sqlfluff.linter.run": "onSave",
+    "sqlfluff.config": "/home/dev/benton/config/.sqlfluff", 
+    "remote.SSH.defaultExtensions": [
+        "ms-python.python",
+        "ms-python.black-formatter",
+        "ms-mssql.mssql",
+        "dorzey.vscode-sqlfluff"
+    ]
+}

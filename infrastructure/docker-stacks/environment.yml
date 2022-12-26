@@ -1,0 +1,33 @@
+name: dbtenv
+dependencies:
+  - conda
+  - pandas
+  - numpy
+  - flask
+  - requests
+  - beautifulsoup4
+  - boto3
+  - bzip2
+  - ipykernel
+  - ipython
+  - jinja2
+  - jupyter
+  - matplotlib
+  - plotly
+  - nbconvert
+  - nbformat
+  - pyodbc==4.0.32
+  - pytest
+  - scikit-learn
+  - seaborn
+  - sqlalchemy
+  - tabulate
+  - tqdm
+  - wheel
+  - black
+  - azure-storage-file
+  - pyyaml
+  - html5lib
+  - sqlfluff
+  - python-dotenv
+
