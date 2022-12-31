@@ -1,0 +1,28 @@
+version: 2
+
+sources:
+  - name: raw
+    description: all sources for now
+    schema: source
+    loaded_at_field: entry_datetime
+    tables:
+      - name: yfinance_ticker
+        loaded_at_field: "entry_datetime"
+        columns:
+          - name: ticker
+          - name: isin
+          - name: entry_datetime
+      - name: yfinance_ticker_history
+        loaded_at_field: "entry_datetime"
+        columns:
+          - name: history_date
+          - name: open_price
+          - name: high_price
+          - name: low_price
+          - name: close_price
+          - name: adjusted_close_price
+          - name: volume
+          - name: dividends
+          - name: stock_splits
+          - name: entry_datetime
+
