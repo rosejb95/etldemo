@@ -1,12 +1,11 @@
 #!/bin/bash
 
 # TODO: Make options required.
-while getopts :n:b:c: flag;
+while getopts :n:b: flag;
 do
     case "${flag}" in
         n) POD_NAME="$OPTARG";;
         b) BRANCH_NAME="$OPTARG";;
-        c) GIT_CREDS="$OPTARG";;
         *) echo "Invalid option -$OPTARG" >&2
         exit 1
         ;;
