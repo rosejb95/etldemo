@@ -1,7 +1,8 @@
+
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ required "Must specify a name for the k8s job" .Values.job_name }}
+  name: {{ required "Must specify a name for the k8s job" .Values.jobname }}
 spec:
   template:
     spec:
@@ -21,7 +22,7 @@ spec:
         - mkdir ~/repo &&
           git clone -b {{ required "Must specify value branch for code branch." .Values.branch }} --single-branch --shallow-submodules https://github.com/rosejb95/etldemo.git ~/repo &&
           chown -R 1000:100 ~/repo &&
-          {{ required "Must specify job_command" .Values.job_command }}
+          {{ required "Must specify job_command" .Values.jobcommand }}
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 22
