@@ -16,6 +16,6 @@ done
 HELM_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # Also using POD_NAME for the value of the helm deployment.
-helm install $POD_NAME "$HELM_DIR" --set podName=$POD_NAME,branch=$BRANCH_NAME,gitCreds=${GIT_CREDS} --wait
+helm install $POD_NAME "$HELM_DIR" --set podName=$POD_NAME,branch=$BRANCH_NAME --wait
 
 kubectl port-forward $POD_NAME 22:22

@@ -1,0 +1,30 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "start_box",
+            "type": "shell",
+            "command": "source infrastructure/helm_charts/bdb-chart/box_start.sh -n ${input:pod_name} -b ${input:branch_name}"
+        },
+        {
+            "label": "box_user_setup",
+            "type": "shell",
+            "command": "source infrastructure/helm_charts/bdb-chart/box_user_setup.sh"
+        },
+    ],
+    "inputs": [
+        {
+          "type": "promptString",
+          "id": "pod_name",
+          "description": "Name of the pod and helm release."
+        },
+        {
+
+          "type": "promptString",
+          "id": "branch_name",
+          "description": "Name of branch to pull"
+        }
+      ]
+}
