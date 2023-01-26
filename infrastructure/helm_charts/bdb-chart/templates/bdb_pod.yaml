@@ -17,7 +17,7 @@ spec:
     command: ["/bin/bash", "-c"]
     args:
     - mkdir ~/repo &&
-      git clone -b {{ required "Must specify value branch for code branch." .Values.branch }} --single-branch --shallow-submodules https://github.com/rosejb95/etldemo.git ~/repo;
+      git clone -b {{ required "Must specify value branch for code branch." .Values.branch }} --single-branch --shallow-submodules git@github.com:rosejb95/etldemo.git ~/repo;
       chown -R 1000:100 ~/repo;
       /usr/sbin/sshd -D
     imagePullPolicy: IfNotPresent
