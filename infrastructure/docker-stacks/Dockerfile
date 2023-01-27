@@ -50,10 +50,23 @@ RUN curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 #   Install appropriate release based on ubuntu version
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
-curl https://packages.microsoft.com/config/ubuntu/$UBUNTU_VERSION/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
-apt-get update && \
-ACCEPT_EULA=Y apt-get install -y msodbcsql18 && \
-ACCEPT_EULA=Y apt-get install -y mssql-tools18
+    curl https://packages.microsoft.com/config/ubuntu/$UBUNTU_VERSION/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
+    apt-get update && \
+    ACCEPT_EULA=Y apt-get install -y msodbcsql18 && \
+    ACCEPT_EULA=Y apt-get install -y mssql-tools18
+
+# install kubectl
+RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
+    curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256" && \
+    echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check && \
+    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+
+# install Helm
+RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 && \
+    chmod 700 get_helm.sh && \
+    ./get_helm.sh && \
+    rm ./get_helm.sh
 
 # Configure environment
 ENV CONDA_DIR=/opt/conda \
@@ -82,6 +95,8 @@ RUN useradd -l -m -s /bin/bash -N -u "${NB_UID}" "${NB_USER}" -g root -G sudo &&
 RUN  echo "$NB_USER:$PASSWORD" | chpasswd
 
 USER ${NB_UID}
+
+
 
 # setup initial condarc
 COPY --chown="${NB_UID}:${NB_GID}" initial-condarc "${CONDA_DIR}/.condarc"
@@ -124,7 +139,7 @@ if [[ "${PYTHON_VERSION}" == "default" ]]; then PYTHON_SPECIFIER="python"; fi &&
 # rm -rf "/home/${NB_USER}/.cache/yarn"pip
 
 RUN pip install dbt-core dbt-sqlserver
-RUN conda activate bash
+RUN eval "$(conda shell.bash hook)"
 
 WORKDIR "${HOME}"
 
