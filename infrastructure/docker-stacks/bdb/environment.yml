@@ -30,4 +30,5 @@ dependencies:
   - html5lib
   - sqlfluff
   - python-dotenv
+  - j2cli
 

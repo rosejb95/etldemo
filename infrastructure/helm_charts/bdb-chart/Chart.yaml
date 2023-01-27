@@ -1,6 +1,0 @@
-apiVersion: v2
-name: bdb-chart
-description: Deploys boxes for ETL jobs or development.
-type: application
-version: 0.1.0
-appVersion: "1.16.0"

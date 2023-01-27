@@ -1,2 +1,0 @@
-helm install bdj "infrastructure/helm_charts/job-chart" --set podName=bdj,branch=main,jobname=testjob,jobcommand='source repo/code/shell/test_job.sh "one"'
-# TODO: clean up container after job execution or potentially run on separate name space. Get environment variables from secret file for run.

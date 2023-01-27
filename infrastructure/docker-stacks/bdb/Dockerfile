@@ -62,12 +62,6 @@ RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/s
     sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
 
-# install Helm
-RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 && \
-    chmod 700 get_helm.sh && \
-    ./get_helm.sh && \
-    rm ./get_helm.sh
-
 # Configure environment
 ENV CONDA_DIR=/opt/conda \
     SHELL=/bin/bash \
@@ -80,11 +74,6 @@ ENV PATH="${CONDA_DIR}/bin:${PATH}:/opt/mssql-tools18/bin" \
     HOME="/home/${NB_USER}"
 
 
-# TODO: remove
-# Copy a script that we will use to correct permissions after running certain commands
-# COPY fix-permissions /usr/local/bin/fix-permissions
-# RUN chmod a+rx /usr/local/bin/fix-permissions
-
 # Create NB_USER with name jovyan user with UID=1000 and in the 'users' group
 # and make sure these dirs are writable by the `users` group.
 RUN useradd -l -m -s /bin/bash -N -u "${NB_UID}" "${NB_USER}" -g root -G sudo && \
@@ -95,7 +84,6 @@ RUN useradd -l -m -s /bin/bash -N -u "${NB_UID}" "${NB_USER}" -g root -G sudo &&
 RUN  echo "$NB_USER:$PASSWORD" | chpasswd
 
 USER ${NB_UID}
-
 
 
 # setup initial condarc

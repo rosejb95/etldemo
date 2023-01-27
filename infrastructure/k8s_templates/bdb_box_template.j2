@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: {{ required "Must specify value podName for name of the k8s pod." .Values.podName }}
+  name: {{ podName }}
 spec: 
   volumes:
   - name: bdb-pv
@@ -17,7 +17,7 @@ spec:
     command: ["/bin/bash", "-c"]
     args:
     - mkdir ~/repo &&
-      git clone -b {{ required "Must specify value branch for code branch." .Values.branch }} --single-branch --shallow-submodules https://github.com/rosejb95/etldemo.git ~/repo &&
+      git clone -b {{ branch }} --single-branch --shallow-submodules https://github.com/rosejb95/etldemo.git ~/repo &&
       chown -R 1000:100 ~/repo &&
       /usr/sbin/sshd -D
     imagePullPolicy: IfNotPresent
