@@ -115,18 +115,10 @@ if [[ "${PYTHON_VERSION}" == "default" ]]; then PYTHON_SPECIFIER="python"; fi &&
     --prefix="${CONDA_DIR}" \
     --yes \
     --file environment.yml 
-# Might not need this cleanup.
-    # && \
-# rm micromamba && \
-# # Pin major.minor version of python
-# mamba list python | grep '^python ' | tr -s ' ' | cut -d ' ' -f 1,2 >> "${CONDA_DIR}/conda-meta/pinned" && \
-# jupyter notebook --generate-config && \
-# mamba clean --all -f -y && \
-# npm cache clean --force && \
-# jupyter lab clean && \
-# rm -rf "/home/${NB_USER}/.cache/yarn"pip
 
 RUN pip install dbt-core dbt-sqlserver
+
+# Initialize bash for conda.
 RUN eval "$(conda shell.bash hook)"
 
 WORKDIR "${HOME}"
@@ -136,9 +128,5 @@ USER root
 # TODO: remove this RUN cmd. This should be passed when spinning up containers as needed instead.
 RUN service ssh start
 CMD ["/usr/sbin/sshd","-D"]
-# ENTRYPOINT [ "/bin/bash" ]
-
-# May or may not want to expose port 22.
-# EXPOSE 22/tcp
 
 WORKDIR "${HOME}"
