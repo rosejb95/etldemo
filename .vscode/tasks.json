@@ -6,13 +6,13 @@
       {
         "label": "start_box",
         "type": "shell",
-        "command": "source infrastructure/helm_charts/bdb-chart/box_start.sh -n ${input:pod_name} -b ${input:branch_name}",
+        "command": "source infrastructure/k8s_templates/start_box.sh ${input:pod_name} ${input:branch_name}",
         "problemMatcher": []
       },
       {
         "label": "box_user_setup",
         "type": "shell",
-        "command": "source infrastructure/helm_charts/bdb-chart/box_user_setup.sh",
+        "command": "source infrastructure/k8s_templates/box_user_setup.sh",
         "problemMatcher": []
       }
     ],
@@ -20,7 +20,7 @@
         {
           "type": "promptString",
           "id": "pod_name",
-          "description": "Name of the pod and helm release."
+          "description": "Name of the pod."
         },
         {
 
