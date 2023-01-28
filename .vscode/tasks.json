@@ -8,12 +8,6 @@
         "type": "shell",
         "command": "source infrastructure/k8s_templates/start_box.sh ${input:pod_name} ${input:branch_name}",
         "problemMatcher": []
-      },
-      {
-        "label": "box_user_setup",
-        "type": "shell",
-        "command": "source infrastructure/k8s_templates/box_user_setup.sh",
-        "problemMatcher": []
       }
     ],
     "inputs": [
