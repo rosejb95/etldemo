@@ -8,7 +8,13 @@
         "type": "shell",
         "command": "source infrastructure/k8s_templates/start_box.sh ${input:pod_name} ${input:branch_name}",
         "problemMatcher": []
-      }
+      },
+      {
+        "label": "connect_to_cluster",
+        "type": "shell",
+        "command": "source infrastructure/k8s_templates/connnect_k8.sh",
+        "problemMatcher": []
+      },
     ],
     "inputs": [
         {
