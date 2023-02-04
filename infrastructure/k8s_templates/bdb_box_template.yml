@@ -13,7 +13,7 @@ spec:
       optional: false
   containers:
   - name: bdb2
-    image: bdbcr.azurecr.io/bdb:2.1.6
+    image: bdbcr.azurecr.io/bdb:{{image_version|default("2.1.6")}}
     command: ["/bin/bash", "-c"]
     args:
     - mkdir ~/repo &&
