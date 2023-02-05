@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ job_name }}
+  name: {{ name }}
   annotations:
     "helm.sh/hook-delete-policy": before-hook-creation
 spec:
@@ -18,13 +18,13 @@ spec:
           optional: false
       containers:
       - name: bdb2
-        image: bdbcr.azurecr.io/bdb:{{image_version|default("2.1.6")}}
+        image: {{ image_tag }}
         command: ["/bin/bash", "-c"]
         args:
         - mkdir ~/repo &&
-          git clone -b {{ branch_name }} --single-branch --shallow-submodules https://github.com/rosejb95/etldemo.git ~/repo &&
+          git clone -b {{ branch }} --single-branch --shallow-submodules https://github.com/rosejb95/etldemo.git ~/repo &&
           chown -R 1000:100 ~/repo &&
-          {{ job_command }}
+          {{ command }}
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 22

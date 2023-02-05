@@ -4,9 +4,15 @@
     "version": "2.0.0",
     "tasks": [
       {
-        "label": "start_box",
+        "label": "start_interactive",
         "type": "shell",
-        "command": "source infrastructure/k8s_templates/start_box.sh ${input:pod_name} ${input:branch_name}",
+        "command": "source infrastructure/k8s_templates/start_box.sh -n ${input:name} -b ${input:branch} -i 'yes'",
+        "problemMatcher": []
+      },
+      {
+        "label": "run_job",
+        "type": "shell",
+        "command": "source infrastructure/k8s_templates/start_box.sh -n ${input:name} -b ${input:branch} -i 'no' -c '${input:command}'",
         "problemMatcher": []
       },
       {
@@ -19,13 +25,27 @@
     "inputs": [
         {
           "type": "promptString",
-          "id": "pod_name",
-          "description": "Name of the pod."
+          "id": "name",
+          "description": "Name of the pod or job."
+        },
+        {
+          "type": "promptString",
+          "id": "command",
+          "description": "Bash command to execute."
+        },
+        {
+          "type": "pickString",
+          "id": "interactive",
+          "description": "Yes if run as running as a development environment. No if running as a job.",
+          "options": [
+            "yes",
+            "no"
+          ]
         },
         {
 
           "type": "promptString",
-          "id": "branch_name",
+          "id": "branch",
           "description": "Name of branch to pull"
         }
       ]
